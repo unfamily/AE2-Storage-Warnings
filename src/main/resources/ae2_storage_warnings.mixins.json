@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.unfamily.ae2_storage_warnings.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MenuOpenerMixin"
+  ],
+  "client": [
+    "client.MEStorageScreenMixin",
+    "client.AEBaseScreenAccessor",
+    "client.VerticalButtonBarAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

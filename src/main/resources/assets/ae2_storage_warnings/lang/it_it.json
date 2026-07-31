@@ -1,0 +1,12 @@
+{
+  "gui.ae2_storage_warnings.warning.title": "WARNING!",
+  "gui.ae2_storage_warnings.warning.bytes": "- %s: lo spazio disponibile è del: %s%%",
+  "gui.ae2_storage_warnings.warning.types": "- %s: i tipi disponibili sono carenti.",
+  "gui.ae2_storage_warnings.warning.ignore": "Ignora Avviso",
+  "gui.ae2_storage_warnings.warning_types.title": "Tipi avviso storage",
+  "gui.ae2_storage_warnings.warning_types.back": "Indietro",
+  "gui.ae2_storage_warnings.warning_types.button": "Tipi avviso storage",
+  "gui.ae2_storage_warnings.warning_types.button.detail": "Attiva o disattiva gli avvisi di capacità per tipo di risorsa",
+  "item.ae2_storage_warnings.guide": "Guida AE2 Storage Warnings",
+  "tooltip.ae2_storage_warnings.guide": "Avvisi di capacità per le cell ME"
+}

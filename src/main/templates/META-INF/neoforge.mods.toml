@@ -31,14 +31,14 @@ config="${mod_id}.mixins.json"
 [[dependencies.${mod_id}]]
     modId="ae2"
     type="required"
-    versionRange="[19.2.0,)"
+    versionRange="[26.1.0,)"
     ordering="AFTER"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
     modId="guideme"
     type="optional"
-    versionRange="[21.1.0,)"
+    versionRange="[26.1.0,)"
     ordering="NONE"
     side="CLIENT"
 

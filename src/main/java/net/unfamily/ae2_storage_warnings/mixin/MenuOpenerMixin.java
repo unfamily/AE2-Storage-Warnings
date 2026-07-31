@@ -1,0 +1,59 @@
+package net.unfamily.ae2_storage_warnings.mixin;
+
+import java.util.List;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.MenuType;
+
+import appeng.menu.MenuOpener;
+import appeng.menu.locator.MenuHostLocator;
+
+import net.unfamily.ae2_storage_warnings.Ae2StorageWarnings;
+import net.unfamily.ae2_storage_warnings.Config;
+import net.unfamily.ae2_storage_warnings.capacity.CapacityWarning;
+import net.unfamily.ae2_storage_warnings.capacity.CellCapacityScanner;
+import net.unfamily.ae2_storage_warnings.intercept.TerminalOpenGuard;
+import net.unfamily.ae2_storage_warnings.menu.StorageWarningMenu;
+import net.unfamily.ae2_storage_warnings.settings.PlayerWarningPreferences;
+
+@Mixin(MenuOpener.class)
+public class MenuOpenerMixin {
+    @Inject(method = "open(Lnet/minecraft/world/inventory/MenuType;Lnet/minecraft/world/entity/player/Player;Lappeng/menu/locator/MenuHostLocator;Z)Z", at = @At("HEAD"), cancellable = true, remap = false)
+    private static void ae2StorageNotifications$interceptOpen(MenuType<?> type, Player player, MenuHostLocator locator,
+            boolean fromSubMenu, CallbackInfoReturnable<Boolean> cir) {
+        if (fromSubMenu || player.level().isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
+            return;
+        }
+        if (!TerminalOpenGuard.shouldIntercept(type, player, locator)) {
+            return;
+        }
+        if (TerminalOpenGuard.consumeSkip(player)) {
+            if (Config.loggingEnabled()) {
+                Ae2StorageWarnings.LOGGER.debug("Skipping warning for {}", player.getGameProfile().name());
+            }
+            return;
+        }
+
+        List<CapacityWarning> warnings = CellCapacityScanner.scan(player, locator);
+        warnings = warnings.stream()
+                .filter(warning -> PlayerWarningPreferences.isWarningEnabled(player, warning.keyTypeId()))
+                .toList();
+        if (warnings.isEmpty()) {
+            return;
+        }
+
+        if (Config.loggingEnabled()) {
+            Ae2StorageWarnings.LOGGER.debug("Intercepting terminal open {} for {} with {} warning(s)",
+                    type, player.getGameProfile().name(), warnings.size());
+        }
+
+        StorageWarningMenu.open(serverPlayer, warnings, type, locator);
+        cir.setReturnValue(true);
+    }
+}

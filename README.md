@@ -1,7 +1,5 @@
 # AE2 Storage Notifications
 
-## Support is provided only upon request.
-
 | Version | Support Status |
 |--------|-----------|
 | 26.1.2 | Supported |

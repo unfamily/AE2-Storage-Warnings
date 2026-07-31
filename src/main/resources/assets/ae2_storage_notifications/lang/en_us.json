@@ -1,0 +1,7 @@
+{
+  "gui.ae2_storage_notifications.warning.title": "ATTENTION!",
+  "gui.ae2_storage_notifications.warning.intro": "Remaining cell/disk space may be insufficient:",
+  "gui.ae2_storage_notifications.warning.bytes": "- %s: available space is %s%%",
+  "gui.ae2_storage_notifications.warning.types": "- %s: available types are scarce.",
+  "gui.ae2_storage_notifications.warning.ignore": "Ignore Warning"
+}

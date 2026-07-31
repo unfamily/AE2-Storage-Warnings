@@ -1,4 +1,4 @@
-# AE2 Storage Notifications
+# AE2 Storage Warnings
 
 | Version | Support Status |
 |--------|-----------|

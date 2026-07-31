@@ -1,0 +1,12 @@
+{
+  "gui.ae2_storage_warnings.warning.title": "WARNING!",
+  "gui.ae2_storage_warnings.warning.bytes": "- %s: available space is %s%%",
+  "gui.ae2_storage_warnings.warning.types": "- %s: available types are low.",
+  "gui.ae2_storage_warnings.warning.ignore": "Ignore Warning",
+  "gui.ae2_storage_warnings.warning_types.title": "Storage warning types",
+  "gui.ae2_storage_warnings.warning_types.back": "Back",
+  "gui.ae2_storage_warnings.warning_types.button": "Storage warning types",
+  "gui.ae2_storage_warnings.warning_types.button.detail": "Enable or disable capacity warnings per resource type",
+  "item.ae2_storage_warnings.guide": "AE2 Storage Warnings Guide",
+  "tooltip.ae2_storage_warnings.guide": "Capacity warnings for ME cells"
+}

@@ -36,6 +36,13 @@ config="${mod_id}.mixins.json"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
+    modId="guideme"
+    type="optional"
+    versionRange="[21.1.0,)"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.${mod_id}]]
     modId="ae2things"
     type="optional"
     versionRange="[0,)"

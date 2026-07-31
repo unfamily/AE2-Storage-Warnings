@@ -22,7 +22,6 @@ public class StorageWarningScreen extends AbstractContainerScreen<StorageWarning
     private static final int BUTTON_WIDTH = 140;
     private static final int MIN_WIDTH = 220;
 
-    private final List<FormattedCharSequence> bodyLines = new ArrayList<>();
     private final List<FormattedCharSequence> warningLines = new ArrayList<>();
     private int panelWidth;
     private int panelHeight;
@@ -35,11 +34,7 @@ public class StorageWarningScreen extends AbstractContainerScreen<StorageWarning
 
     @Override
     protected void init() {
-        bodyLines.clear();
         warningLines.clear();
-
-        Component intro = Component.translatable("gui.ae2_storage_notifications.warning.intro");
-        bodyLines.addAll(font.split(intro, MIN_WIDTH - PADDING * 2));
 
         for (CapacityWarning warning : menu.getWarnings()) {
             Component line = switch (warning.kind()) {
@@ -52,8 +47,6 @@ public class StorageWarningScreen extends AbstractContainerScreen<StorageWarning
         }
 
         int contentHeight = LINE_HEIGHT // title
-                + 4
-                + bodyLines.size() * LINE_HEIGHT
                 + 4
                 + warningLines.size() * LINE_HEIGHT
                 + 10
@@ -93,14 +86,9 @@ public class StorageWarningScreen extends AbstractContainerScreen<StorageWarning
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         int y = PADDING;
-        guiGraphics.drawString(font, title, PADDING, y, 0x404040, false);
+        int titleWidth = font.width(title);
+        guiGraphics.drawString(font, title, (panelWidth - titleWidth) / 2, y, 0xFF5555, false);
         y += LINE_HEIGHT + 4;
-
-        for (FormattedCharSequence line : bodyLines) {
-            guiGraphics.drawString(font, line, PADDING, y, 0x404040, false);
-            y += LINE_HEIGHT;
-        }
-        y += 4;
 
         for (FormattedCharSequence line : warningLines) {
             guiGraphics.drawString(font, line, PADDING, y, 0x404040, false);

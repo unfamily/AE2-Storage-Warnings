@@ -12,7 +12,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
 
 import net.unfamily.ae2_storage_notifications.client.ClientSetup;
+import net.unfamily.ae2_storage_notifications.client.GuideMeRegistration;
 import net.unfamily.ae2_storage_notifications.menu.ModMenus;
+import net.unfamily.ae2_storage_notifications.network.ModNetwork;
 
 @Mod(Ae2StorageNotifications.MODID)
 public class Ae2StorageNotifications {
@@ -22,8 +24,10 @@ public class Ae2StorageNotifications {
     public Ae2StorageNotifications(IEventBus modEventBus, ModContainer modContainer) {
         ModMenus.MENU_TYPES.register(modEventBus);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modEventBus.addListener(ModNetwork::register);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
+            GuideMeRegistration.register();
             ClientSetup.init(modEventBus);
         }
     }

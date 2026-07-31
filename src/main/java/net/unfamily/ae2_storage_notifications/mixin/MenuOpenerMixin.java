@@ -20,6 +20,7 @@ import net.unfamily.ae2_storage_notifications.capacity.CapacityWarning;
 import net.unfamily.ae2_storage_notifications.capacity.CellCapacityScanner;
 import net.unfamily.ae2_storage_notifications.intercept.TerminalOpenGuard;
 import net.unfamily.ae2_storage_notifications.menu.StorageWarningMenu;
+import net.unfamily.ae2_storage_notifications.settings.PlayerWarningPreferences;
 
 @Mixin(MenuOpener.class)
 public class MenuOpenerMixin {
@@ -29,7 +30,7 @@ public class MenuOpenerMixin {
         if (fromSubMenu || player.level().isClientSide() || !(player instanceof ServerPlayer serverPlayer)) {
             return;
         }
-        if (!TerminalOpenGuard.isStorageTerminal(type)) {
+        if (!TerminalOpenGuard.shouldIntercept(type, player, locator)) {
             return;
         }
         if (TerminalOpenGuard.consumeSkip(player)) {
@@ -40,13 +41,16 @@ public class MenuOpenerMixin {
         }
 
         List<CapacityWarning> warnings = CellCapacityScanner.scan(player, locator);
+        warnings = warnings.stream()
+                .filter(warning -> PlayerWarningPreferences.isWarningEnabled(player, warning.keyTypeId()))
+                .toList();
         if (warnings.isEmpty()) {
             return;
         }
 
         if (Config.loggingEnabled()) {
-            Ae2StorageNotifications.LOGGER.debug("Intercepting terminal open for {} with {} warning(s)",
-                    player.getGameProfile().getName(), warnings.size());
+            Ae2StorageNotifications.LOGGER.debug("Intercepting terminal open {} for {} with {} warning(s)",
+                    type, player.getGameProfile().getName(), warnings.size());
         }
 
         StorageWarningMenu.open(serverPlayer, warnings, type, locator);

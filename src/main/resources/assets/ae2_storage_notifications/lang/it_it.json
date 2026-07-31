@@ -1,7 +1,12 @@
 {
-  "gui.ae2_storage_notifications.warning.title": "ATTENZIONE!",
-  "gui.ae2_storage_notifications.warning.intro": "Lo spazio rimanente delle cell/disk è potenzialmente insufficiente:",
+  "gui.ae2_storage_notifications.warning.title": "WARNING!",
   "gui.ae2_storage_notifications.warning.bytes": "- %s: lo spazio disponibile è del: %s%%",
   "gui.ae2_storage_notifications.warning.types": "- %s: i tipi disponibili sono carenti.",
-  "gui.ae2_storage_notifications.warning.ignore": "Ignora Avviso"
+  "gui.ae2_storage_notifications.warning.ignore": "Ignora Avviso",
+  "gui.ae2_storage_notifications.warning_types.title": "Tipi avviso storage",
+  "gui.ae2_storage_notifications.warning_types.back": "Indietro",
+  "gui.ae2_storage_notifications.warning_types.button": "Tipi avviso storage",
+  "gui.ae2_storage_notifications.warning_types.button.detail": "Attiva o disattiva gli avvisi di capacità per tipo di risorsa",
+  "item.ae2_storage_notifications.guide": "Guida AE2 Storage Notifications",
+  "tooltip.ae2_storage_notifications.guide": "Avvisi di capacità per le cell ME"
 }

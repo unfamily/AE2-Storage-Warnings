@@ -6,8 +6,11 @@
   "mixins": [
     "MenuOpenerMixin"
   ],
-  "client": [],
-  "server": [],
+  "client": [
+    "client.MEStorageScreenMixin",
+    "client.AEBaseScreenAccessor",
+    "client.VerticalButtonBarAccessor"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
